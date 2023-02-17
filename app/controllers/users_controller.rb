@@ -17,17 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # def show_by_email
-  #   if @user
-  #     render json: @user.email, status: :ok
-  #   else
-  #     render json: {
-  #              errors: @user.errors.full_messages
-  #            },
-  #            status: :unprocessable_entity
-  #   end
-  # end
-
   def create
     user = User.new(user_params)
     if user.save
