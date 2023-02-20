@@ -41,14 +41,14 @@ class UsersController < ApplicationController
   end
 
   def show_employees
-    if @user.designation == "Manager"
+    if @user.Manager?
       emp = User.where(manager_id: @user.id)
       render json: [
                @user.as_json(only: %i[name email]),
                emp.as_json(only: %i[id name email])
              ]
     else
-      render json: { errors: "This employee is not a Manager." }
+      render json: { errors: I18n.t(:show_employee_error_msg) }
     end
   end
 
