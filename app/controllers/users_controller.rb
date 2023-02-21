@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[update show destory]
+  before_action :set_user, only: %i[update show destory show_employees]
 
   def index
     users = User.all
@@ -37,6 +37,18 @@ class UsersController < ApplicationController
                errors: @user.errors.full_messages
              },
              status: :unprocessable_entity
+    end
+  end
+
+  def show_employees
+    if @user.Manager?
+      emp = User.where(manager_id: @user.id)
+      render json: [
+               @user.as_json(only: %i[name email]),
+               emp.as_json(only: %i[id name email])
+             ]
+    else
+      render json: { errors: I18n.t(:show_employee_error_msg) }
     end
   end
 

@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  show_employee_error_msg: "This employee is not a Manager."
