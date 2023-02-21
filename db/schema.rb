@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_17_060927) do
+ActiveRecord::Schema.define(version: 2023_02_21_054940) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2023_02_17_060927) do
     t.string "gender"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "designation"
+    t.string "designation"
     t.integer "manager_id"
     t.index ["manager_id"], name: "index_users_on_manager_id"
   end
