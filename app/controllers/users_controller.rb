@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   end
 
   def show_employees
-    if @user.Manager?
+    if @user.manager?
       emp = User.where(manager_id: @user.id)
       render json: [
                @user.as_json(only: %i[name email]),
