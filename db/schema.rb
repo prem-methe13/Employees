@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_21_054940) do
+ActiveRecord::Schema.define(version: 2023_03_03_093502) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -19,11 +19,12 @@ ActiveRecord::Schema.define(version: 2023_02_21_054940) do
     t.date "dob"
     t.string "mobileNo"
     t.string "bloodGrp"
-    t.string "gender"
+    t.integer "gender"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "designation"
     t.integer "manager_id"
+    t.string "password_digest"
     t.index ["manager_id"], name: "index_users_on_manager_id"
   end
 
