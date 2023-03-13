@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[update show destory show_employees]
+  before_action :set_user, only: %i[update show destroy show_employees]
+  before_action :authorize_request, except: :create
 
   def index
     users = User.all
@@ -75,6 +76,10 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { errors: "User not found" }, status: :not_found
+    end
   end
 end

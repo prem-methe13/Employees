@@ -17,6 +17,9 @@ gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'active_model_serializers'
 
+gem 'simple_command'
+gem 'actionmailer'
+gem 'pry', '~> 0.13.1'
 gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
