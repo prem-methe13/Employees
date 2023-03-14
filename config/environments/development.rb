@@ -1,6 +1,8 @@
 require "active_support/core_ext/integer/time"
+require "openssl"
 
 Rails.application.configure do
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -16,10 +18,10 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join("tmp", "caching-dev.txt").exist?
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      "Cache-Control" => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -31,8 +33,8 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
@@ -50,7 +52,23 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {
+    host: "localhost:3000",
+    protocol: "http"
+  }
 
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: "premmethe0@gmail.com",
+    password: "eybfhpktmdkobvkf",
+    authentication: :plain,
+    enable_starttls_auto: true,
+    tls: true,
+    openssl_verfiy_mode: 'none'
+  }
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
